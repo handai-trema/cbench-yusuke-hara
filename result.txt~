@@ -1,0 +1,50 @@
+
+#------------------------------------------------------------------
+#---------------------original-------------------------------------
+#------------------------------------------------------------------
+$./bin/cbench --port 6653 --switches 1 --loops 10 --ms-per-test 10000 --delay 1000 --throughput
+cbench: controller benchmarking tool
+   running in mode 'throughput'
+   connecting to controller at localhost:6653 
+   faking 1 switches :: 10 tests each; 10000 ms per test
+   with 100000 unique source MACs per switch
+   starting test with 1000 ms delay after features_reply
+   ignoring first 1 "warmup" and last 0 "cooldown" loops
+   debugging info is off
+1   switches: fmods/sec:  107   total = 0.010681 per ms 
+1   switches: fmods/sec:  83   total = 0.008209 per ms 
+1   switches: fmods/sec:  69   total = 0.006824 per ms 
+1   switches: fmods/sec:  69   total = 0.006872 per ms 
+1   switches: fmods/sec:  75   total = 0.007420 per ms 
+1   switches: fmods/sec:  61   total = 0.006026 per ms 
+1   switches: fmods/sec:  55   total = 0.005454 per ms 
+1   switches: fmods/sec:  49   total = 0.004833 per ms 
+1   switches: fmods/sec:  54   total = 0.005379 per ms 
+1   switches: fmods/sec:  73   total = 0.007225 per ms 
+RESULT: 1 switches 9 tests min/max/avg/stdev = 4.83/8.21/6.47/1.05 responses/s
+
+
+#------------------------------------------------------------------
+#---------------------modified-------------------------------------
+#------------------------------------------------------------------
+./bin/cbench --port 6653 --switches 1 --loops 10 --ms-per-test 10000 --delay 1000 --throughput
+cbench: controller benchmarking tool
+   running in mode 'throughput'
+   connecting to controller at localhost:6653 
+   faking 1 switches :: 10 tests each; 10000 ms per test
+   with 100000 unique source MACs per switch
+   starting test with 1000 ms delay after features_reply
+   ignoring first 1 "warmup" and last 0 "cooldown" loops
+   debugging info is off
+1   switches: fmods/sec:  135   total = 0.013483 per ms 
+1   switches: fmods/sec:  105   total = 0.010469 per ms 
+1   switches: fmods/sec:  92   total = 0.009168 per ms 
+1   switches: fmods/sec:  79   total = 0.007825 per ms 
+1   switches: fmods/sec:  98   total = 0.009786 per ms 
+1   switches: fmods/sec:  82   total = 0.008177 per ms 
+1   switches: fmods/sec:  76   total = 0.007510 per ms 
+1   switches: fmods/sec:  66   total = 0.006551 per ms 
+1   switches: fmods/sec:  61   total = 0.006092 per ms 
+1   switches: fmods/sec:  87   total = 0.008627 per ms 
+RESULT: 1 switches 9 tests min/max/avg/stdev = 6.09/10.47/8.24/1.36 responses/s
+
