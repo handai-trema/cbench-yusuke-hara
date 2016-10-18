@@ -91,5 +91,5 @@ RESULT: 1 switches 9 tests min/max/avg/stdev = 4.83/8.21/6.47/1.05 responses/s
 ####修正後
 `RESULT: 1 switches 9 tests min/max/avg/stdev = 6.09/10.47/8.24/1.36 responses/s`
 
-一秒あたりの処理パケット数が平均で6.47から8.24に向上しており，ボトルネックの解消ができたと考えられる，
+一秒あたりの処理パケット数が平均で6.47から8.24に向上しており，ボトルネックの解消ができたと考えられる．
 
