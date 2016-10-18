@@ -54,3 +54,42 @@ packet_inメソッド内のマッチングルールを指定するmatchオプシ
 を生成する．12個の条件とはスイッチの物理ポート番号や送信元MACアドレスなどがある．これらは
 パケットから情報を参照しているので，BinDataの\_valueメソッドを何回も呼び出す事となる．
 この点が遅い原因となっている．
+## 発展課題 (Cbench の高速化)
+###課題内容
+ボトルネックを改善し Cbench を高速化しよう。
+###解答
+以下のように修正を行った．
+
+```
+# A simple openflow controller for benchmarking.
+class Cbench < Trema::Controller
+  def start(_args)
+    logger.info 'Cbench started.'
+  end
+
+  def packet_in(datapath_id, message)
+    send_flow_mod_add(
+      datapath_id,
+      match: Match.new(in_port:message.in_port),
+      buffer_id: message.buffer_id,
+      actions: SendOutPort.new(message.in_port + 1)
+    )
+  end
+end
+```
+今回flow modメッセージのアクションはPacket In メッセージのin_portに+1したポートへ転送しているので条件として必要なのはポート番号のみでよい．そこでsend\_flow\_mod\_addのオプションのmatchに
+
+```
+match: Match.new(in_port:message.in_port),
+```
+とポート番号のみを条件とすることで，パケットからの値の呼び出し回数が減りボトルネックが解消される．  
+以下に修正前と修正後のcbenchの実行結果を表示する．
+####修正前
+`
+RESULT: 1 switches 9 tests min/max/avg/stdev = 4.83/8.21/6.47/1.05 responses/s
+`
+####修正後
+`RESULT: 1 switches 9 tests min/max/avg/stdev = 6.09/10.47/8.24/1.36 responses/s`
+
+一秒あたりの処理パケット数が平均で6.47から8.24に向上しており，ボトルネックの解消ができたと考えられる，
+
